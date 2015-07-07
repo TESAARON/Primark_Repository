@@ -1,0 +1,20 @@
+appetizer.solution <- local (
+function (target) {
+  app <- c(2.10, 2.75, 3.35, 3.55, 4.20, 5.80)
+  r <- 2L
+  repeat {
+	c <- gtools::combinations(length(app), r=r, v=app, repeats.allowed=TRUE)
+	s <- rowSums(c)
+	if ( all(s > target) ) {
+	  print("No solution found")
+	  break
+	}
+	x <- which( abs(s-target) < 1e-4 )
+	if ( length(x) > 0L ) {
+	  cat("Solution found: ", c[x,], "\n")
+	  break
+	}
+	r <- r + 1L
+  }
+})
+appetizer.solution(15.05)
